@@ -1,4 +1,12 @@
 {
+	"inputs": [
+		{
+			"id": "memory_file_path",
+			"type": "promptString",
+			"description": "Path to the memory storage file (optional)",
+			"password": false
+		}
+	],
 	"servers": {
 		"sequentialthinking": {
 			"command": "npx",
@@ -19,28 +27,14 @@
 			},
 			"type": "stdio"
 		},
-		"git": {
-			"command": "uvx",
-			"args": [
-				"mcp-server-git"
-			],
-			"type": "stdio"
-		},
 		"filesystem": {
 			"command": "npx",
 			"args": [
 				"-y",
 				"@modelcontextprotocol/server-filesystem",
 				"/Users/logan/Desktop/Workspace"
-			]
+			],
+			"type": "stdio"
 		}
-	},
-	"inputs": [
-		{
-			"id": "memory_file_path",
-			"type": "promptString",
-			"description": "Path to the memory storage file (optional)",
-			"password": false
-		},
-	]
+	}
 }

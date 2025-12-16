@@ -1,74 +1,93 @@
 [package]
 name = "rust-learing"
-version = "0.1.0"
+version = "2.0.0"
 edition = "2024"
+authors = ["Rust学习团队"]
+description = "系统性 Rust 学习项目 - 从基础到实战"
+license = "MIT"
+repository = "https://github.com/awsl1414/rust-learning"
 
 [dependencies]
 rand = "0.9.2"
 tokio = { version = "1.47.1", features = ["full"] }
 tokio-stream = "0.1.17"
 
-# 为每个学习文件定义独立的可执行文件
-[[bin]]
-name = "01_variables_and_mutability"
-path = "src/01_variables_and_mutability.rs"
+# 现代化 Rust 学习项目 - 二进制文件配置
+# 使用 Rust 2024 Edition 最佳实践
 
 [[bin]]
-name = "02_data_types"
-path = "src/02_data_types.rs"
+name = "hello"
+path = "src/00_hello.rs"
 
 [[bin]]
-name = "03_functions_and_scope"
-path = "src/03_functions_and_scope.rs"
+name = "variables"
+path = "src/01_variables.rs"
 
 [[bin]]
-name = "04_control_flow"
-path = "src/04_control_flow.rs"
+name = "types"
+path = "src/02_types.rs"
 
 [[bin]]
-name = "05_ownership_and_borrowing"
-path = "src/05_ownership_and_borrowing.rs"
+name = "functions"
+path = "src/03_functions.rs"
 
 [[bin]]
-name = "06_references_and_slices"
-path = "src/06_references_and_slices.rs"
+name = "control"
+path = "src/04_control.rs"
 
 [[bin]]
-name = "07_structs_and_methods"
-path = "src/07_structs_and_methods.rs"
+name = "ownership"
+path = "src/05_ownership.rs"
 
 [[bin]]
-name = "08_enums_and_pattern_matching"
-path = "src/08_enums_and_pattern_matching.rs"
+name = "references"
+path = "src/06_references.rs"
 
 [[bin]]
-name = "09_collections"
+name = "structs"
+path = "src/07_structs.rs"
+
+[[bin]]
+name = "enums"
+path = "src/08_enums.rs"
+
+[[bin]]
+name = "collections"
 path = "src/09_collections.rs"
 
 [[bin]]
-name = "10_modules_and_packages"
-path = "src/10_modules_and_packages.rs"
+name = "errors"
+path = "src/10_errors.rs"
 
 [[bin]]
-name = "11_error_handling"
-path = "src/11_error_handling.rs"
+name = "generics"
+path = "src/11_generics.rs"
 
 [[bin]]
-name = "12_generics"
-path = "src/12_generics.rs"
+name = "lifetimes"
+path = "src/12_lifetimes.rs"
 
 [[bin]]
-name = "13_traits"
-path = "src/13_traits.rs"
+name = "modules"
+path = "src/13_modules.rs"
 
 [[bin]]
-name = "14_lifetimes"
-path = "src/14_lifetimes.rs"
+name = "async"
+path = "src/14_async.rs"
 
 [[bin]]
-name = "15_standard_library"
-path = "src/15_standard_library.rs"
+name = "std_lib"
+path = "src/15_std.rs"
 
 [[bin]]
-name = "16_async_programming"
-path = "src/16_async_programming.rs"
+name = "project_cli"
+path = "src/projects/cli.rs"
+
+[[bin]]
+name = "project_web"
+path = "src/projects/web.rs"
+
+# 练习文件
+[[bin]]
+name = "exercises"
+path = "src/exercises/mod.rs"

@@ -1,119 +1,121 @@
-// 06_references_and_slices.rs - 引用与切片
+// 06_references.rs - 引用与切片
 // 本文件深入展示 Rust 中引用的高级用法和切片类型
 
 fn main() {
     println!("=== Rust 引用与切片 ===\n");
-    
+
     // ========== 引用的深入理解 ==========
     println!("========== 引用的深入理解 ==========");
-    
+
     // 1. 引用的基本概念
     println!("\n1. 引用的基本概念：");
     let x = 5;
     let y = &x; // y 是 x 的引用
-    
+
     println!("x = {}", x);
     println!("y = {}", y);
     println!("*y = {}", *y); // 解引用获取值
-    
+
     // 引用的引用
     let z = &y; // z 是 y 的引用（y 本身是引用）
     println!("z = {}", z);
     println!("*z = {}", *z);
     println!("**z = {}", **z); // 双重解引用
-    
+
     // 2. 引用的比较
     println!("\n2. 引用的比较：");
     let a = 5;
     let b = 5;
     let ref_a = &a;
     let ref_b = &b;
-    
+
     println!("a == b: {}", a == b);
     println!("ref_a == ref_b: {}", ref_a == ref_b); // 比较值，不是地址
-    println!("ref_a as *const i32 == ref_b as *const i32: {}", 
-             ref_a as *const i32 == ref_b as *const i32); // 比较地址
-    
+    println!(
+        "ref_a as *const i32 == ref_b as *const i32: {}",
+        ref_a as *const i32 == ref_b as *const i32
+    ); // 比较地址
+
     // ========== 字符串切片 ==========
     println!("\n========== 字符串切片 ==========");
-    
+
     // 3. 字符串切片基础
     println!("\n3. 字符串切片基础：");
     let s = String::from("hello world");
-    
+
     // 创建字符串切片
-    let hello = &s[0..5];  // 或 &s[..5]
+    let hello = &s[0..5]; // 或 &s[..5]
     let world = &s[6..11]; // 或 &s[6..]
-    let whole = &s[..];    // 整个字符串的切片
-    
+    let whole = &s[..]; // 整个字符串的切片
+
     println!("原字符串: '{}'", s);
     println!("hello: '{}'", hello);
     println!("world: '{}'", world);
     println!("whole: '{}'", whole);
-    
+
     // 4. 字符串字面值就是切片
     println!("\n4. 字符串字面值：");
     let s = "Hello, world!"; // s 的类型是 &str
     println!("字符串字面值: '{}'", s);
-    
+
     // 5. 字符串切片作为参数
     println!("\n5. 字符串切片作为参数：");
     let my_string = String::from("hello world");
     let my_string_literal = "hello world";
-    
+
     // 使用 &str 类型的参数可以同时接受 String 和 &str
     let word1 = first_word_slice(&my_string[..]);
     let word2 = first_word_slice(&my_string);
     let word3 = first_word_slice(my_string_literal);
-    
+
     println!("第一个单词1: '{}'", word1);
     println!("第一个单词2: '{}'", word2);
     println!("第一个单词3: '{}'", word3);
-    
+
     // ========== 数组切片 ==========
     println!("\n========== 数组切片 ==========");
-    
+
     // 6. 数组切片基础
     println!("\n6. 数组切片基础：");
     let arr = [1, 2, 3, 4, 5];
-    
-    let slice1 = &arr[1..4];  // [2, 3, 4]
-    let slice2 = &arr[..3];   // [1, 2, 3]
-    let slice3 = &arr[2..];   // [3, 4, 5]
-    let slice4 = &arr[..];    // [1, 2, 3, 4, 5]
-    
+
+    let slice1 = &arr[1..4]; // [2, 3, 4]
+    let slice2 = &arr[..3]; // [1, 2, 3]
+    let slice3 = &arr[2..]; // [3, 4, 5]
+    let slice4 = &arr[..]; // [1, 2, 3, 4, 5]
+
     println!("原数组: {:?}", arr);
     println!("slice1 [1..4]: {:?}", slice1);
     println!("slice2 [..3]: {:?}", slice2);
     println!("slice3 [2..]: {:?}", slice3);
     println!("slice4 [..]: {:?}", slice4);
-    
+
     // 7. 切片的操作
     println!("\n7. 切片的操作：");
     let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let slice = &numbers[2..8];
-    
+
     println!("原向量: {:?}", numbers);
     println!("切片: {:?}", slice);
     println!("切片长度: {}", slice.len());
     println!("切片第一个元素: {}", slice[0]);
     println!("切片最后一个元素: {}", slice[slice.len() - 1]);
-    
+
     // 迭代切片
     print!("迭代切片: ");
     for item in slice {
         print!("{} ", item);
     }
     println!();
-    
+
     // ========== 可变切片 ==========
     println!("\n========== 可变切片 ==========");
-    
+
     // 8. 可变切片
     println!("\n8. 可变切片：");
     let mut arr = [1, 2, 3, 4, 5];
     println!("修改前: {:?}", arr);
-    
+
     {
         let slice = &mut arr[1..4];
         slice[0] = 10; // 修改切片中的元素
@@ -121,97 +123,95 @@ fn main() {
         slice[2] = 30;
         println!("修改切片: {:?}", slice);
     }
-    
+
     println!("修改后: {:?}", arr);
-    
+
     // 9. 切片参数的函数
     println!("\n9. 切片参数的函数：");
     let mut numbers = vec![5, 2, 8, 1, 9, 3];
     println!("排序前: {:?}", numbers);
-    
+
     // 传递切片给函数进行修改
     bubble_sort(&mut numbers);
     println!("排序后: {:?}", numbers);
-    
+
     let sum = calculate_sum_slice(&numbers[1..4]);
     println!("中间三个数的和: {}", sum);
-    
+
     // ========== 高级切片操作 ==========
     println!("\n========== 高级切片操作 ==========");
-    
+
     // 10. 切片的split方法
     println!("\n10. 切片的split方法：");
     let text = "hello,world,rust,programming";
     let words: Vec<&str> = text.split(',').collect();
     println!("分割字符串: {:?}", words);
-    
+
     // 11. 切片的窗口操作
     println!("\n11. 切片的窗口操作：");
     let data = [1, 2, 3, 4, 5, 6];
-    
+
     // 滑动窗口
     println!("大小为3的滑动窗口:");
     for window in data.windows(3) {
         println!("  {:?}", window);
     }
-    
+
     // 分块
     println!("大小为2的分块:");
     for chunk in data.chunks(2) {
         println!("  {:?}", chunk);
     }
-    
+
     // ========== 字符串操作高级示例 ==========
     println!("\n========== 字符串操作高级示例 ==========");
-    
+
     // 12. 复杂字符串处理
     println!("\n12. 复杂字符串处理：");
     let text = "  Hello, World!  ";
-    
+
     // 去除空白
     let trimmed = text.trim();
     println!("原文本: '{}'", text);
     println!("去空白: '{}'", trimmed);
-    
+
     // 查找子字符串
     if let Some(pos) = text.find("World") {
         println!("'World' 在位置: {}", pos);
-        let world_slice = &text[pos..pos+5];
+        let world_slice = &text[pos..pos + 5];
         println!("提取的切片: '{}'", world_slice);
     }
-    
+
     // 13. 字符串替换和处理
     println!("\n13. 字符串替换和处理：");
     let sentence = "The quick brown fox jumps over the lazy dog";
-    
+
     // 单词处理
     let words: Vec<&str> = sentence.split_whitespace().collect();
     println!("单词列表: {:?}", words);
-    
+
     // 查找长单词
-    let long_words: Vec<&str> = words.into_iter()
-        .filter(|word| word.len() > 4)
-        .collect();
+    let long_words: Vec<&str> = words.into_iter().filter(|word| word.len() > 4).collect();
     println!("长单词 (>4字符): {:?}", long_words);
-    
+
     // 14. UTF-8 字符串处理
     println!("\n14. UTF-8 字符串处理：");
     let chinese = "你好，世界！";
     println!("中文字符串: '{}'", chinese);
     println!("字节长度: {}", chinese.len());
     println!("字符数量: {}", chinese.chars().count());
-    
+
     // 按字符迭代
     print!("逐字符: ");
     for c in chinese.chars() {
         print!("'{}' ", c);
     }
     println!();
-    
+
     // 字符索引（注意：不能直接用数字索引UTF-8字符串）
     let chars: Vec<char> = chinese.chars().collect();
     println!("第二个字符: '{}'", chars[1]);
-    
+
     println!("\n=== 引用与切片学习完成 ===");
 }
 
@@ -220,13 +220,13 @@ fn main() {
 // 返回字符串中第一个单词的切片
 fn first_word_slice(s: &str) -> &str {
     let bytes = s.as_bytes();
-    
+
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' ' {
             return &s[0..i];
         }
     }
-    
+
     &s[..]
 }
 
@@ -274,17 +274,17 @@ fn count_words(text: &str) -> usize {
 fn is_palindrome(s: &str) -> bool {
     let s = s.chars().collect::<Vec<_>>();
     let len = s.len();
-    
+
     for i in 0..len / 2 {
         if s[i] != s[len - 1 - i] {
             return false;
         }
     }
-    
+
     true
 }
 
-/* 
+/*
 重要概念总结：
 
 引用类型：
@@ -318,5 +318,5 @@ fn is_palindrome(s: &str) -> bool {
 - 利用迭代器而不是手动索引
 
 编译运行：
-cargo run --bin 06_references_and_slices
+cargo run --bin references
 */

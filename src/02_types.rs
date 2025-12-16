@@ -1,4 +1,4 @@
-// 02_data_types.rs - 数据类型（标量与复合）
+// 02_types.rs - 数据类型（标量与复合）
 // 本文件展示 Rust 中的基本数据类型和复合数据类型
 
 fn main() {
@@ -172,5 +172,5 @@ fn main() {
 4. 溢出检查：debug 模式下检查整数溢出
 
 编译运行：
-cargo run --bin 02_data_types
+cargo run --bin types
 */
